@@ -1,0 +1,17 @@
+{
+  "ppd": 64,
+  "minimumY": 1024,
+  "maximumY": 10240,
+  "wrapHorizontally": true,
+  "wrapVertically": false,
+  "verticalScalar": 80,
+  "tileNamePattern": "Moon_${column}_${row}.tile",
+  "format": "eW8",
+  "tileDimension": 512,
+  "columnCount": 45,
+  "rowCount": 22,
+  "comment": "Second implementation using moon data from NASA's 'CGI Moon Kit'. Shadows were done in Blender using elevation map.",
+  "version": "1.0",
+  "creator": "John Calhoun",
+  "name": "Moon (~64ppd)"
+}

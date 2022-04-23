@@ -1,0 +1,360 @@
+<!DOCTYPE xhtml>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Mooncraft</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
+		<script src="FPS.js"></script>
+		<script src="LocalStorage.js"></script>
+		<script src="LunarFeatures.js"></script>
+		<script src="Mooncraft.js"></script>
+		<script src="MoonBaseMonitor.js"></script>
+		<script src="MoonBaseUtils.js"></script>
+		<script src="MoonCamera.js"></script>
+		<script src="MoonCompass.js"></script>
+		<script src="MoonDebriefState.js"></script>
+		<script src="MoonFlyingState.js"></script>
+		<script src="MoonIdiots.js"></script>
+		<script src="MoonInput.js"></script>
+		<script src="MoonMap.js"></script>
+		<script src="MoonMonitor.js"></script>
+		<script src="MoonNixies.js"></script>
+		<script src="MoonRadar.js"></script>
+		<script src="MoonSounds.js"></script>
+		<script src="VoxelCanvas.js"></script>
+		<script src="VoxelProvider.js"></script>
+		<script src="VoxelSky.js"></script>
+	</head>
+	<body>
+		<div id="game_console">
+			<canvas id="canvas1" width="512" height="384">
+				Your browser does not support canvas. Nothing to show.
+			</canvas>
+			
+			<p class="coffee_text" style="text-align:center;"> If you enjoy this free game, consider <a class="coffee_anchor" href="https://ko-fi.com/engineersneedart">buying me a <s>sake</s> coffee&hellip;</a></p>
+		</div>
+		
+		<div class="flex-container">
+			<div id="thrust" class="content-mobile unselectable">
+				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/capslock.svg"></div>
+			</div>
+			<div id="forward" class="content-mobile unselectable">
+				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/caret-up.svg"></div>
+			</div>
+			<div id="reverse" class="content-mobile unselectable">
+				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/caret-down.svg"></div>
+			</div>
+			<div id="yaw_left" class="content-mobile unselectable">
+				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/caret-left.svg"></div>
+			</div>
+			<div id="yaw_right" class="content-mobile unselectable">
+				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/caret-right.svg"></div>
+			</div>
+		</div>
+		
+		<div id="basement" class="unselectable" style="overflow:hidden;">
+			<img src="artwork/MooncraftMap.jpg" style="object-fit: contain; height:100%; width:100%; margin-top:8px;">
+		</div>
+		
+		<!-- Welcome Modal Window -->
+		<div id="welcome_modal" class="modal">
+			<div class="modal-content">
+				<span class="close_modal" id="welcome_close">&times;</span>
+				<img src="artwork/MooncraftBanner.png" style="max-width: 100%; height:auto; display:block; margin-left:auto; margin-right:auto; margin-top:8px; padding:8px;">
+				<p class="modal_header" id="welcome_header" style="text-align:center;">Welcome to Mooncraft!</p>
+				<p class="modal_text" id="welcome_body" style="text-align:left;">Close to begin.</p>
+			</div>
+		</div>
+		
+		<!-- Alert Modal Window -->
+		<div id="alert_modal" class="modal">
+			<div class="modal-content">
+				<span class="close_modal" id="alert_close">&times;</span>
+				<p class="modal_header" id="alert_title" style="text-align:center;">Title</p>
+				<p class="modal_text" id="alert_message" style="text-align:left;">Message</p>
+				<div id="alert_button_container">
+					<button class="button" id="alert_cancel">Cancel</button>
+					<button class="button" id="alert_okay">Okay</button>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+			window.onload = (event) => {
+				canvas = document.getElementById ('canvas1');
+				resizeEventHandler ();
+				window.addEventListener ("resize", resizeEventHandler);
+				
+				// Prepare 'Welcome' modal window.
+				var beginner = Mooncraft.playerRank () === 0;
+				var isMobile = /android.+mobile|ip(hone|[oa]d)/i.test(navigator.userAgent);
+				if (beginner) {
+					document.getElementById ('welcome_header').innerHTML = "Welcome to the Moon.";
+					var welcomeBodyText = "As an Apprentice trucker, you will transport small amounts of cargo from lunar bases relatively close in proximity to one another. You will be directed to your destination base. Fuel levels will be aportioned for you." + 
+						"<p>When you have accumulated the requisite number of points, you will advance to Journeyman.";
+					if (!isMobile) {
+						welcomeBodyText += "<p>Controls:<p>&nbsp;&nbsp;Vertical thrust (lift) \u2192 Spacebar<br>&nbsp;&nbsp;Forward \u2192 W or Up-arrow<br>&nbsp;&nbsp;Reverse \u2192 S or Down-arrow<br>&nbsp;&nbsp;Left \u2192 A or Left-arrow<br>&nbsp;&nbsp;Right \u2192 D or Right-arrow";
+					}
+					welcomeBodyText += "<p>Close to begin."
+					document.getElementById ('welcome_body').innerHTML = welcomeBodyText;
+					
+				} else {
+					var playerTitle = Mooncraft.playerTitle ();
+					document.getElementById ('welcome_header').innerHTML = "Welcome back to the Moon, " + playerTitle + ".";
+				}
+				welcome_modal = prepare_welcome_window ('welcome_modal', 'welcome_close');
+				alert_modal = prepare_modal_window ('alert_modal', 'alert_close');
+				
+				// Thrust button.
+				let thrust_div = document.querySelector("#thrust");
+				thrust_div.addEventListener ("mousedown", clicked_primary);
+				thrust_div.addEventListener ("mouseup", released_primary);
+				thrust_div.addEventListener ("mouseleave", released_primary);
+				thrust_div.addEventListener ("touchstart", clicked_primary);
+				thrust_div.addEventListener ("touchend", released_primary);
+				thrust_div.addEventListener ("touchmove", clicked_primary);
+				thrust_div.addEventListener ("touchcancel", released_primary);
+				
+				// Forward button.
+				let forward_div = document.querySelector("#forward");
+				forward_div.addEventListener ("mousedown", clicked_upArrow);
+				forward_div.addEventListener ("mouseup", released_upArrow);
+				forward_div.addEventListener ("mouseleave", released_upArrow);
+				forward_div.addEventListener ("touchstart", clicked_upArrow);
+				forward_div.addEventListener ("touchend", released_upArrow);
+				forward_div.addEventListener ("touchmove", clicked_upArrow);
+				forward_div.addEventListener ("touchcancel", released_upArrow);
+				
+				// Reverse button.
+				let reverse_div = document.querySelector("#reverse");
+				reverse_div.addEventListener ("mousedown", clicked_downArrow);
+				reverse_div.addEventListener ("mouseup", released_downArrow);
+				reverse_div.addEventListener ("mouseleave", released_downArrow);
+				reverse_div.addEventListener ("touchstart", clicked_downArrow);
+				reverse_div.addEventListener ("touchend", released_downArrow);
+				reverse_div.addEventListener ("touchmove", clicked_downArrow);
+				reverse_div.addEventListener ("touchcancel", released_downArrow);
+				
+				// Yaw left button.
+				let yaw_left_div = document.querySelector("#yaw_left");
+				yaw_left_div.addEventListener ("mousedown", clicked_leftArrow);
+				yaw_left_div.addEventListener ("mouseup", released_leftArrow);
+				yaw_left_div.addEventListener ("mouseleave", released_leftArrow);
+				yaw_left_div.addEventListener ("touchstart", clicked_leftArrow);
+				yaw_left_div.addEventListener ("touchend", released_leftArrow);
+				yaw_left_div.addEventListener ("touchmove", clicked_leftArrow);
+				yaw_left_div.addEventListener ("touchcancel", released_leftArrow);
+				
+				// Yaw right button.
+				let yaw_right_div = document.querySelector("#yaw_right");
+				yaw_right_div.addEventListener ("mousedown", clicked_rightArrow);
+				yaw_right_div.addEventListener ("mouseup", released_rightArrow);
+				yaw_right_div.addEventListener ("mouseleave", released_rightArrow);
+				yaw_right_div.addEventListener ("touchstart", clicked_rightArrow);
+				yaw_right_div.addEventListener ("touchend", released_rightArrow);
+				yaw_right_div.addEventListener ("touchmove", clicked_rightArrow);
+				yaw_right_div.addEventListener ("touchcancel", released_rightArrow);
+				
+				Mooncraft.setAlertCallback (mooncraftAlertCallback)
+				Mooncraft.init (canvas, 512);
+				Mooncraft.load ();
+				
+				document.getElementById ('welcome_modal').style.display = "block";
+				document.getElementById ('alert_modal').style.display = "none";
+			};
+			
+			function mooncraftAlertCallback (title, message, okay_function, cancel_function, okay_title, cancel_title) {
+				var modalWindow = document.getElementById ('alert_modal');
+				
+				// Set title, message.
+				document.getElementById ('alert_title').innerHTML = title;
+				document.getElementById ('alert_message').innerHTML = message;
+				document.getElementById ('alert_okay').innerHTML = okay_title;
+				document.getElementById ('alert_cancel').innerHTML = cancel_title;
+				
+				if ((okay_function === null) && (cancel_function === null)) {
+					// No callbacks. Just show close box, hide buttons.
+					document.getElementById ('alert_close').style.display = "block";
+					document.getElementById ('alert_okay').style.display = "none";
+					document.getElementById ('alert_cancel').style.display = "none";
+				} else {
+					document.getElementById ('alert_close').style.display = "none";
+					if (okay_function === null) {
+						document.getElementById ('alert_okay').style.display = "none";
+					} else {
+						var buttonElement = document.getElementById ('alert_okay');
+						buttonElement.style.display = "inline-block";
+						buttonElement.onclick = function () {
+							modalWindow.style.display = "none";
+							okay_function ()
+						}
+					}
+					if (cancel_function === null) {
+						document.getElementById ('alert_button_container').style.textAlign = "center";
+						document.getElementById ('alert_cancel').style.display = "none";
+					} else {
+						document.getElementById ('alert_button_container').style.textAlign = "right";
+						var buttonElement = document.getElementById ('alert_cancel');
+						buttonElement.style.display = "inline-block";
+						buttonElement.onclick = function () {
+							modalWindow.style.display = "none";
+							cancel_function ()
+						}
+					}
+				}
+				
+				// Show alert.
+				modalWindow.style.display = "block";
+			}
+			
+			function canvasScaleFactor (canvas) {
+				// Return the maximum size that fits both width and height by finding the minimium scale factor.
+				// return Math.min ((document.body.clientWidth - 40) / 512, (document.body.clientHeight - 120) / 400);
+				return Math.min ((document.body.clientWidth) / 512, (document.body.clientHeight - 40) / 400);
+			}
+			
+			function size_the_basement () {
+				basement = document.getElementById ("basement");
+				basement.style.top = window.innerHeight + 'px';
+			}
+			
+			function resizeEventHandler () {
+				canvas = document.getElementById ('canvas1');
+				var canvasScale = canvasScaleFactor (canvas);
+				canvas.style.width = (canvas.width = (512 * canvasScale)|0) + "px";
+				canvas.style.height = (canvas.height = (400 * canvasScale)|0) + "px";
+				
+				var consoleImage = new Image ();
+				consoleImage.src = 'artwork/console.png';
+				consoleImage.onload = function () {
+					var context = canvas.getContext ('2d');
+					context.save ();
+					context.scale (canvasScale, canvasScale);
+					context.drawImage (consoleImage, 0, 0);
+					context.restore ();
+				}
+			}
+			
+			function clicked_primary (event) {
+				Mooncraft.primaryAction (true);
+				document.querySelector("#thrust").style.backgroundColor = "darkslateblue";
+				event.returnValue = false;
+			}
+			
+			function released_primary (event) {
+				Mooncraft.primaryAction (false);
+				document.querySelector("#thrust").style.backgroundColor = "lightgray";
+				event.returnValue = false;
+			}
+			
+			function clicked_upArrow (event) {
+				Mooncraft.upAction (true);
+				document.querySelector("#forward").style.backgroundColor = "darkslateblue";
+				event.returnValue = false;
+			}
+			
+			function released_upArrow (event) {
+				Mooncraft.upAction (false);
+				document.querySelector("#forward").style.backgroundColor = "lightgray";
+				event.returnValue = false;
+			}
+			
+			function clicked_downArrow (event) {
+				Mooncraft.downAction (true);
+				document.querySelector("#reverse").style.backgroundColor = "darkslateblue";
+				event.returnValue = false;
+			}
+			
+			function released_downArrow (event) {
+				Mooncraft.downAction (false);
+				document.querySelector("#reverse").style.backgroundColor = "lightgray";
+				event.returnValue = false;
+			}
+			
+			function clicked_leftArrow (event) {
+				Mooncraft.leftAction (true);
+				document.querySelector("#yaw_left").style.backgroundColor = "darkslateblue";
+				event.returnValue = false;
+			}
+			
+			function released_leftArrow (event) {
+				Mooncraft.leftAction (false);
+				document.querySelector("#yaw_left").style.backgroundColor = "lightgray";
+				event.returnValue = false;
+			}
+			
+			function clicked_rightArrow (event) {
+				Mooncraft.rightAction (true);
+				document.querySelector("#yaw_right").style.backgroundColor = "darkslateblue";
+				event.returnValue = false;
+			}
+			
+			function released_rightArrow (event) {
+				Mooncraft.rightAction (false);
+				document.querySelector("#yaw_right").style.backgroundColor = "lightgray";
+				event.returnValue = false;
+			}
+			
+			function prepare_welcome_window (modalID, closeID) {
+				var modalElement = document.getElementById (modalID);
+				var closeElement = document.getElementById (closeID);
+				
+				// Hide modal element when close element clicked.
+				closeElement.onclick = function () {
+					modalElement.style.display = "none";
+					
+					// Initializing sound here will allow audio to play on Safari.
+					MoonSounds.init ();
+					Mooncraft.start ();
+				}
+				
+				// When the user clicks anywhere outside of the modal element, close it.
+				window.onclick = function (event) {
+					if (event.target == modalElement) {
+						modalElement.style.display = "none";
+						
+						// Initializing sound here will allow audio to play on Safari.
+						MoonSounds.init ();
+						Mooncraft.start ();
+					}
+				}
+				
+				// When the user clicks anywhere outside of the modal element, close it.
+				close = function () {
+					modalElement.style.display = "none";
+					
+					// Initializing sound here will allow audio to play on Safari.
+					MoonSounds.init ();
+					Mooncraft.start ();
+				}
+				
+				return {close : close};
+			};
+			
+			function prepare_modal_window (modalID, closeID) {
+				var modalElement = document.getElementById (modalID);
+				var closeElement = document.getElementById (closeID);
+				
+				// Hide modal element when close element clicked.
+				closeElement.onclick = function () {
+					modalElement.style.display = "none";
+				}
+				
+				// When the user clicks anywhere outside of the modal element, close it.
+				window.onclick = function (event) {
+					if (event.target == modalElement) {
+						modalElement.style.display = "none";
+					}
+				}
+				
+				// When the user clicks anywhere outside of the modal element, close it.
+				close = function () {
+					modalElement.style.display = "none";
+				}
+				
+				return {close : close};
+			};
+		</script>
+	</body>
+</html>

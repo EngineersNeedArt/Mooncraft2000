@@ -1,0 +1,161 @@
+body {
+	background-color: black;
+	margin: 0;	/* paired with canvas {display: block}, removes scrollbars */
+}
+
+canvas {
+	padding: 0;
+    margin: auto;
+	display: block;	/* paired with body {margin: 0}, removes scrollbars */
+	background: rgb(32, 32, 32);
+}
+
+.flex-container {
+	display: flex;
+	justify-content: center;
+	background-color:rgb(0, 0, 0);
+	flex-wrap: wrap;
+	position: relative;
+}
+
+.flex-container > div {
+	background-color: lightgrey;
+	width: 64px;
+	height: 64px;
+	margin: 10px;
+	border-radius: 13px;
+}
+
+.icon-container {
+	display: flex;
+  	justify-content: center;
+	align-items: center;
+}
+
+.center {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.vertical-center {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.unselectable {
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+ 
+@media (max-width: 768px) {
+	.content-desktop {
+		display: none;
+	}
+	.content-mobile {
+		display: block;
+	}
+}
+
+@media (min-width: 768px) {
+	.content-desktop {
+		display: block;
+	}
+	.content-mobile {
+		display: none;
+	}
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 9999;
+	padding-top: 100px; /* Location of the box - BOGUS: center vertically*/
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0,0,0,0.3);
+}
+
+.modal-content {
+	background-color: black;
+	margin: auto;
+	padding-top: 2px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 16px;
+	border: 8px solid rgba(0,0,0,0.5);
+	border-radius: 16px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
+	max-width: 480px;
+}
+
+.close_modal {
+	color: white;
+	float: right;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.close_modal:hover,
+.close_modal:focus {
+	color: rgb(233, 141, 67);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modal_header {
+	font-family: arial;
+	font-size: 20px;
+	font-weight: bold;
+	color: rgb(233, 141, 67);
+}
+
+.modal_text {
+	font-family: arial;
+	font-size: 14px;
+	font-weight: bold;
+	color: rgb(160, 160, 160);
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.coffee_text {
+	font-family: arial;
+	font-size: 14px;
+	font-weight: bold;
+	color: rgb(160, 160, 160);
+}
+
+.coffee_anchor {
+	font-family: arial;
+	font-size: 14px;
+	font-weight: bold;
+	color: rgb(233, 141, 67);
+}
+
+.button {
+	background-color: rgb(233, 141, 67);
+	border: none;
+	color: white;
+	padding: 8px 16px;
+	text-decoration: none;
+	display: inline-block;
+	font-family: arial;
+	font-size: 14px;
+	margin: 8px 2px;
+	cursor: pointer;
+}

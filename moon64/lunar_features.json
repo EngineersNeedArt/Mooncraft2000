@@ -1,0 +1,691 @@
+{
+  "base_array": [
+    {
+      "loc_x": 10502,
+      "display_name": "PAR",
+      "name": "Parry Depot",
+      "type": 1,
+      "loc_y": 6111
+    },
+    {
+      "loc_x": 10219,
+      "display_name": "COP",
+      "name": "Copernicus Depot",
+      "type": 6,
+      "loc_y": 4987
+    },
+    {
+      "loc_x": 11327,
+      "display_name": "PTO",
+      "name": "Ptolemaeus Depot",
+      "type": 7,
+      "loc_y": 6121
+    },
+    {
+      "loc_x": 11335,
+      "display_name": "PRB",
+      "name": "Purbach Station",
+      "type": 8,
+      "loc_y": 7278
+    },
+    {
+      "name": "Archimedes Station",
+      "display_name": "ARC",
+      "loc_x": 11218,
+      "loc_y": 3739,
+      "type": 1
+    },
+    {
+      "name": "Iridum Station",
+      "display_name": "IRI",
+      "loc_x": 9255,
+      "loc_y": 2643,
+      "type": 2
+    },
+    {
+      "name": "Schroter's Valley",
+      "display_name": "SCV",
+      "loc_x": 8234,
+      "loc_y": 3977,
+      "type": 3
+    },
+    {
+      "name": "Straight Range",
+      "display_name": "STR",
+      "loc_x": 10174,
+      "loc_y": 2491,
+      "type": 1
+    },
+    {
+      "name": "Maginus Station",
+      "display_name": "MAG",
+      "loc_x": 11186,
+      "loc_y": 8759,
+      "type": 1
+    },
+    {
+      "name": "Grimaldi Base",
+      "display_name": "GRI",
+      "loc_x": 7077,
+      "loc_y": 5933,
+      "type": 5
+    },
+    {
+      "name": "Capaunus Station",
+      "display_name": "CAP",
+      "loc_x": 9823,
+      "loc_y": 7787,
+      "type": 7
+    },
+    {
+      "name": "Rima Sharp Mine",
+      "display_name": "RIM",
+      "loc_x": 8300,
+      "loc_y": 2616,
+      "type": 4
+    }
+  ],
+  "crater_array": [
+    {
+      "name": "Tycho",
+      "display_name": "Tycho",
+      "loc_l": 10685,
+      "loc_t": 8290,
+      "loc_r": 10915,
+      "loc_b": 8520
+    },
+    {
+      "name": "Clavius",
+      "display_name": "Clavius",
+      "loc_l": 10227,
+      "loc_t": 9075,
+      "loc_r": 10951,
+      "loc_b": 9799
+    },
+    {
+      "name": "Maginus",
+      "loc_l": 10977,
+      "loc_t": 8660,
+      "loc_r": 11331,
+      "loc_b": 9014
+    },
+    {
+      "loc_t": 4913,
+      "loc_b": 5114,
+      "name": "Copernicus",
+      "loc_l": 10130,
+      "loc_r": 10333
+    },
+    {
+      "loc_b": 4767,
+      "display_name": "E.",
+      "loc_t": 4637,
+      "name": "Eratosthenes",
+      "loc_l": 10731,
+      "loc_r": 10860
+    },
+    {
+      "loc_b": 8541,
+      "display_name": "Wilh.",
+      "loc_t": 8281,
+      "name": "Wilhelm",
+      "loc_l": 10054,
+      "loc_r": 10314
+    },
+    {
+      "loc_b": 7630,
+      "display_name": "Pit.",
+      "loc_t": 7439,
+      "name": "Pitatus",
+      "loc_l": 10542,
+      "loc_r": 10733
+    },
+    {
+      "loc_b": 7028,
+      "display_name": "B.",
+      "loc_t": 6890,
+      "name": "Bullialdus",
+      "loc_l": 10023,
+      "loc_r": 10160
+    },
+    {
+      "loc_t": 5610,
+      "loc_b": 5700,
+      "name": "Lansberg",
+      "loc_l": 9774,
+      "loc_r": 9864
+    },
+    {
+      "loc_t": 5374,
+      "loc_b": 5472,
+      "name": "Reinhold",
+      "loc_l": 10005,
+      "loc_r": 10103
+    },
+    {
+      "loc_b": 8987,
+      "display_name": "Longom.",
+      "loc_t": 8607,
+      "name": "Longomontanus",
+      "loc_l": 9933,
+      "loc_r": 10314
+    },
+    {
+      "loc_t": 7663,
+      "loc_b": 7749,
+      "name": "Hell",
+      "loc_l": 10973,
+      "loc_r": 11059
+    },
+    {
+      "loc_b": 7942,
+      "display_name": "Walter",
+      "loc_t": 7593,
+      "name": "Walter",
+      "loc_l": 11397,
+      "loc_r": 11725
+    },
+    {
+      "loc_b": 6436,
+      "display_name": "G.",
+      "loc_t": 6304,
+      "name": "Guericke",
+      "loc_l": 10546,
+      "loc_r": 10678
+    },
+    {
+      "loc_t": 6090,
+      "loc_b": 6190,
+      "name": "Parry",
+      "loc_l": 10459,
+      "loc_r": 10559
+    },
+    {
+      "loc_t": 5544,
+      "loc_b": 5600,
+      "name": "Gambart",
+      "loc_l": 10514,
+      "loc_r": 10570
+    },
+    {
+      "loc_t": 7123,
+      "loc_b": 7394,
+      "name": "Purbach",
+      "loc_l": 11254,
+      "loc_r": 11525
+    },
+    {
+      "loc_b": 6899,
+      "display_name": "Arz.",
+      "loc_t": 6699,
+      "name": "Arzachel",
+      "loc_l": 11291,
+      "loc_r": 11491
+    },
+    {
+      "loc_b": 6619,
+      "display_name": "Alph.",
+      "loc_t": 6362,
+      "name": "Alphonsus",
+      "loc_l": 11217,
+      "loc_r": 11475
+    },
+    {
+      "loc_b": 6376,
+      "loc_t": 6060,
+      "name": "Ptolemaeus",
+      "loc_l": 11247,
+      "loc_r": 11563
+    },
+    {
+      "loc_t": 6609,
+      "loc_b": 6700,
+      "name": "Alpetragius",
+      "loc_l": 11185,
+      "loc_r": 11276
+    },
+    {
+      "loc_t": 3947,
+      "loc_b": 4014,
+      "name": "Lambert",
+      "loc_l": 10138,
+      "loc_r": 10204
+    },
+    {
+      "loc_t": 3886,
+      "loc_b": 3965,
+      "name": "Timocharis",
+      "loc_l": 10640,
+      "loc_r": 10719
+    },
+    {
+      "loc_b": 3816,
+      "loc_t": 3638,
+      "name": "Archimedes",
+      "loc_l": 11176,
+      "loc_r": 11354
+    },
+    {
+      "loc_t": 4294,
+      "loc_b": 4336,
+      "name": "Pytheas",
+      "loc_l": 10178,
+      "loc_r": 10220
+    },
+    {
+      "loc_b": 7894,
+      "loc_t": 7745,
+      "name": "Capaunus",
+      "loc_l": 9732,
+      "loc_r": 9880
+    },
+    {
+      "loc_t": 7451,
+      "loc_b": 7558,
+      "name": "Mercator",
+      "loc_l": 9795,
+      "loc_r": 9903
+    },
+    {
+      "loc_t": 7371,
+      "loc_b": 7485,
+      "name": "Campanus",
+      "loc_l": 9677,
+      "loc_r": 9790
+    },
+    {
+      "loc_t": 4110,
+      "loc_b": 4169,
+      "name": "Euler",
+      "loc_l": 9622,
+      "loc_r": 9682
+    },
+    {
+      "loc_t": 5079,
+      "loc_b": 5142,
+      "name": "Kepler",
+      "loc_l": 9053,
+      "loc_r": 9115
+    },
+    {
+      "loc_t": 5891,
+      "loc_b": 5940,
+      "name": "Lalande",
+      "loc_l": 10942,
+      "loc_r": 10991
+    },
+    {
+      "loc_t": 5311,
+      "loc_b": 5370,
+      "name": "Encke",
+      "loc_l": 9144,
+      "loc_r": 9202
+    },
+    {
+      "loc_t": 6091,
+      "loc_b": 6118,
+      "name": "Euclides",
+      "loc_l": 9613,
+      "loc_r": 9641
+    },
+    {
+      "loc_t": 3624,
+      "loc_b": 3704,
+      "name": "Autolycus",
+      "loc_l": 11568,
+      "loc_r": 11658
+    },
+    {
+      "loc_t": 3399,
+      "loc_b": 3530,
+      "name": "Aristillus",
+      "loc_l": 11530,
+      "loc_r": 11661
+    },
+    {
+      "loc_t": 6724,
+      "loc_b": 6825,
+      "name": "Lubiniezky",
+      "loc_l": 9942,
+      "loc_r": 10044
+    },
+    {
+      "loc_t": 4069,
+      "loc_b": 4157,
+      "name": "Aristarchus",
+      "loc_l": 8433,
+      "loc_r": 8521
+    },
+    {
+      "loc_b": 2457,
+      "display_name": "Plato",
+      "loc_t": 2210,
+      "name": "Plato",
+      "loc_l": 10803,
+      "loc_r": 11050
+    },
+    {
+      "loc_t": 2463,
+      "loc_b": 2557,
+      "name": "Blanchinus",
+      "loc_l": 9272,
+      "loc_r": 9366
+    },
+    {
+      "loc_t": 2926,
+      "loc_b": 3010,
+      "name": "Mairan",
+      "loc_l": 8692,
+      "loc_r": 8776
+    },
+    {
+      "loc_t": 2655,
+      "loc_b": 2752,
+      "name": "Sharp",
+      "loc_l": 8895,
+      "loc_r": 8991
+    },
+    {
+      "loc_t": 3016,
+      "loc_b": 3074,
+      "name": "Helicon",
+      "loc_l": 10010,
+      "loc_r": 10067
+    },
+    {
+      "loc_t": 3025,
+      "loc_b": 3074,
+      "name": "Le Verrier",
+      "loc_l": 10175,
+      "loc_r": 10224
+    },
+    {
+      "loc_t": 3100,
+      "loc_b": 3132,
+      "name": "Kirch",
+      "loc_l": 11141,
+      "loc_r": 11173
+    },
+    {
+      "loc_t": 3457,
+      "loc_b": 3484,
+      "name": "Carlini",
+      "loc_l": 9961,
+      "loc_r": 9987
+    },
+    {
+      "loc_b": 7498,
+      "display_name": "W.",
+      "loc_t": 7347,
+      "name": "Werner",
+      "loc_l": 11652,
+      "loc_r": 11803
+    },
+    {
+      "loc_t": 5326,
+      "loc_b": 5415,
+      "name": "Agrippa",
+      "loc_l": 12143,
+      "loc_r": 12232
+    },
+    {
+      "loc_t": 4826,
+      "loc_b": 4909,
+      "name": "Marius",
+      "loc_l": 8221,
+      "loc_r": 8305
+    },
+    {
+      "loc_t": 4857,
+      "loc_b": 4913,
+      "name": "Ross",
+      "loc_l": 12881,
+      "loc_r": 12936
+    },
+    {
+      "loc_t": 5701,
+      "loc_b": 5813,
+      "name": "d'Alembert",
+      "loc_l": 12577,
+      "loc_r": 12688
+    },
+    {
+      "loc_b": 6501,
+      "display_name": "Albat.",
+      "loc_t": 6214,
+      "name": "Albategnius",
+      "loc_l": 11635,
+      "loc_r": 11921
+    },
+    {
+      "loc_t": 4103,
+      "loc_b": 4184,
+      "name": "Herodotus",
+      "loc_l": 8290,
+      "loc_r": 8372
+    },
+    {
+      "loc_t": 4108,
+      "loc_b": 4163,
+      "name": "Schiaparelli",
+      "loc_l": 7725,
+      "loc_r": 7780
+    },
+    {
+      "loc_t": 4515,
+      "loc_b": 4628,
+      "name": "Krafft",
+      "loc_l": 6810,
+      "loc_r": 6923
+    },
+    {
+      "loc_b": 4627,
+      "display_name": "E.",
+      "loc_t": 4510,
+      "name": "Einstein",
+      "loc_l": 5814,
+      "loc_r": 5931
+    },
+    {
+      "loc_t": 4231,
+      "loc_b": 4336,
+      "name": "Seleucus",
+      "loc_l": 7205,
+      "loc_r": 7309
+    },
+    {
+      "loc_b": 4879,
+      "display_name": "Bo.",
+      "loc_t": 4728,
+      "name": "Bohr",
+      "loc_l": 5897,
+      "loc_r": 6047
+    },
+    {
+      "loc_t": 4730,
+      "loc_b": 4834,
+      "name": "Cardanus",
+      "loc_l": 6821,
+      "loc_r": 6924
+    },
+    {
+      "loc_t": 5156,
+      "loc_b": 5221,
+      "name": "Reiner",
+      "loc_l": 7968,
+      "loc_r": 8033
+    },
+    {
+      "loc_t": 5246,
+      "loc_b": 5372,
+      "name": "Cavelerius",
+      "loc_l": 7174,
+      "loc_r": 7300
+    },
+    {
+      "loc_b": 5615,
+      "display_name": "Hev.",
+      "loc_t": 5367,
+      "name": "Hevelius",
+      "loc_l": 7080,
+      "loc_r": 7328
+    },
+    {
+      "loc_b": 6875,
+      "display_name": "Gas.",
+      "loc_t": 6629,
+      "name": "Gassendi",
+      "loc_l": 8838,
+      "loc_r": 9084
+    },
+    {
+      "loc_b": 6182,
+      "loc_t": 5743,
+      "name": "Grimaldi",
+      "loc_l": 6895,
+      "loc_r": 7333
+    },
+    {
+      "loc_t": 5334,
+      "loc_b": 5392,
+      "name": "Triesnecker",
+      "loc_l": 11720,
+      "loc_r": 11778
+    },
+    {
+      "loc_t": 4668,
+      "loc_b": 4753,
+      "name": "Manilius",
+      "loc_l": 12057,
+      "loc_r": 12142
+    },
+    {
+      "loc_t": 3232,
+      "loc_b": 3292,
+      "name": "Theaetetus",
+      "loc_l": 11876,
+      "loc_r": 11936
+    },
+    {
+      "loc_b": 3124,
+      "display_name": "C.",
+      "loc_t": 2988,
+      "name": "Cassini",
+      "loc_l": 11746,
+      "loc_r": 11876
+    },
+    {
+      "loc_b": 7931,
+      "display_name": "Gem.",
+      "loc_t": 7708,
+      "name": "Gemma Frisius",
+      "loc_l": 12263,
+      "loc_r": 12486
+    },
+    {
+      "loc_b": 8327,
+      "display_name": "Metius",
+      "loc_t": 8116,
+      "name": "Metius",
+      "loc_l": 14191,
+      "loc_r": 14403
+    },
+    {
+      "loc_b": 7794,
+      "display_name": "S.",
+      "loc_t": 7635,
+      "name": "Stevinus",
+      "loc_l": 14905,
+      "loc_r": 15063
+    },
+    {
+      "loc_b": 7613,
+      "display_name": "S.",
+      "loc_t": 7418,
+      "name": "Snellius",
+      "loc_l": 14990,
+      "loc_r": 15184
+    },
+    {
+      "loc_t": 7096,
+      "loc_b": 7222,
+      "name": "Wrottesley",
+      "loc_l": 15079,
+      "loc_r": 15204
+    },
+    {
+      "loc_t": 6873,
+      "loc_b": 6940,
+      "name": "Petavius B",
+      "loc_l": 15132,
+      "loc_r": 15198
+    },
+    {
+      "loc_b": 7450,
+      "display_name": "Petavius",
+      "loc_t": 7058,
+      "name": "Petavius",
+      "loc_l": 15201,
+      "loc_r": 15593
+    },
+    {
+      "loc_t": 6907,
+      "loc_b": 7043,
+      "name": "Santbech",
+      "loc_l": 14260,
+      "loc_r": 14396
+    },
+    {
+      "loc_t": 7281,
+      "loc_b": 7425,
+      "name": "Apianus",
+      "loc_l": 11947,
+      "loc_r": 12091
+    },
+    {
+      "loc_t": 6308,
+      "loc_b": 6366,
+      "name": "Mädler",
+      "loc_l": 13394,
+      "loc_r": 13452
+    },
+    {
+      "loc_b": 6480,
+      "display_name": "Theo.",
+      "loc_t": 6256,
+      "name": "Theophilus",
+      "loc_l": 13090,
+      "loc_r": 13314
+    },
+    {
+      "loc_b": 6583,
+      "display_name": "Cyr.",
+      "loc_t": 6385,
+      "name": "Cyrillus",
+      "loc_l": 12949,
+      "loc_r": 13147
+    },
+    {
+      "loc_t": 6279,
+      "loc_b": 6344,
+      "name": "Kant",
+      "loc_l": 12778,
+      "loc_r": 12844
+    },
+    {
+      "loc_b": 7133,
+      "display_name": "Frac.",
+      "loc_t": 6866,
+      "name": "Fracastorius",
+      "loc_l": 13503,
+      "loc_r": 13770
+    },
+    {
+      "loc_t": 6730,
+      "loc_b": 6839,
+      "name": "Beaumont",
+      "loc_l": 13308,
+      "loc_r": 13417
+    }
+  ]
+}
