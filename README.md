@@ -133,6 +133,8 @@ Occasional medical emergencies might emerge and take high priority &mdash; movin
 
 What if cargo could be jettisoned anywhere over the surface of the moon, picked up later?
 
+Love to figure out how to make dust billow up when you touch-down/lift-off.
+
 A huge move forward would be to add the ability to render 3D into the scene (or psuedo-3D like the classic *Wing Commander* series of games). Other mooncraft could be seen taking off, landing at bases, flying between bases (the bases themselves could be made more interesting looking). Suddenly mercantilism combined with multi-player could then transform the game. In addition to the rendering technical challenges however, a server back-end and something like Web Sockets would be required&hellip;
 
 <p align="center">
