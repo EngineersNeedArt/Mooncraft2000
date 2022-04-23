@@ -103,6 +103,8 @@ For the 64ppd data set, I did start with a mosaic (map) of the entire moon. It w
 
 Finally, the Moon is also not to scale vertically. There is a vertical scale factor I apply to the terrain — a bigger value makes the craters deeper, the mountains more peaked. A friend who's something of an avid hobbyist astronomer took a Mooncraft for a spin and suggested that I take the vertical scale down a bit to make it more true to the actual Moon. I swear that I did try dialing it back but I'm afraid I had already fallen in love with the more exaggerated Moon terrain I had begun with and so rolled it back up again.
 
+More about creating the game here: https://www.engineersneedart.com/mooncraft2000/mooncraft2000.html
+
 ### Shortcomings
 
 Poor performance on less-than-high-end hardware is my sorest regret. I tried all manner of things to eke out more FPS. The surest way I found to improve the speed was to either make the canvas smaller (thus lower resolution) or to set the "yon" distance to be considerably shorter (the horizon would end abruptly). I did not wish to shrink the canvas any more than the already small size of 512 pixels wide &mdash; it became much too chunky.
