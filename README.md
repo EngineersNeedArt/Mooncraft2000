@@ -10,8 +10,6 @@ I experimented with a few tricks to try to keep this classic pseudo-voxel algori
 <img src="https://github.com/EngineersNeedArt/Mooncraft2000/blob/07a643031af5796f521418073956f04901b00056/documentation/Screenshot.jpg" alt="Mooncraft 2000 screenshot.">
 </p>
 
-The game renders the Moon from actual data pulled from NASA and other space-agencies. As an Apprentice moon trucker, you fly your mooncraft from lunar base to lunar base moving cargo to where it's needed. Truck enough cargo to earn your Journeyman certification and you'll be on your way to achieving Master.
-
 ### How to Play
 
 If your browser is running on a desktop machine there are just five keyboard controls:
@@ -37,7 +35,7 @@ Back on the surface, the base platform allows you to change heading before lift-
 
 Long cargo runs (distances of 2000 or more) count for double-cargo and will advance you in rank more quickly. Distances of 3000 or greater count as a triple-cargo bonus.
 
-If you become stranded, unable to make it to a base, you are penalized.
+If you become stranded, unable to make it to a base, you are penalized but will be rescued.
 
 Crash your mooncraft, you are heavily penalized.
 
@@ -47,7 +45,7 @@ Crash your mooncraft, you are heavily penalized.
 
 #### Compass
 
-At the top is a standard compass (inertial, not magnetic). Markings N, S, E & W as well as intermediate NE, SE, SW, and NW. Pilot is expected to be able to estimate unmarked headings such as N/NW (north by northwest — halfway between N and NW).
+At the top is an inertial compass. Markings N, S, E & W as well as intermediate NE, SE, SW, and NW. Pilot is expected to be able to estimate unmarked headings such as N/NW (north by northwest — halfway between N and NW).
 
 #### Map
 
@@ -63,7 +61,7 @@ Lower right computer monitor (8-bit). Displays messages from various sources. In
 
 ### FPS
 
-The "1" key toggles a little debug display in the lower right corner of the Map. The time to execute one entire frame in milliseconds is displayed in the top-right. Frames-per-second (FPS) is displayed below. I have never seen FPS exceed 60 &mdash; perhaps the HTML5 Canvas only renders during "screen refreshes" and is gaited to 60 FPS (I know, screen refreshes seem a bit archaic these days).
+The "1" key toggles a little debug display in the lower right corner of the Map. The time to execute one entire frame in milliseconds is displayed in the top-right. Frames-per-second (FPS) is displayed below. I have never seen FPS exceed 60 &mdash; perhaps the HTML5 Canvas only renders during "screen refreshes" and is gaited to 60 FPS.
 
 The letters to the left of FPS indicate the state of various game settings.
 
@@ -81,9 +79,13 @@ The letters to the left of FPS indicate the state of various game settings.
 
 The voxel algorithm has been around since the 1990's so here I will give only a brief description. It's a kind of "ray casting" (like a poor man's ray-tracer). The view of the landscape (what the player sees) is, to the algorithm, a series of vertical slits, or pixel columns. The algorithm works on one column at a time. It computes the slope of an imaginary line leaving the player's eye and passing through the bottom-most pixel of the particular pixel-column in question. The ray is advanced, step-wise (slope-wise), until it is determined that it has intercepted a Moon voxel.
 
-My Javascript implementation took inspiration from this code from eight years ago: https://github.com/pmhicks/voxeljs
+My Javascript implementation took inspiration from [this code](https://github.com/pmhicks/voxeljs) from eight years ago.
 
 The Moon is a vast mosaic of tiles, each tile 512 x 512 "voxels". Because it is a simple terrain map, you can think of each tile as a 512 x 512 grid where, for each square in the grid, there is a color and an elevation. This being the Moon, the color is of course some shade of gray. The elevation is what gives rise to the craters, mountains, mare of the moon.
+
+> The Moon data came from NASA's [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720).
+> 
+> The color data for the Moon is without shadows, so I had to render shadows into the color data using the application [Blender](https://www.blender.org). Since the shadows were rendered "relief style" (also, orthographically) the Sun is at the same ascension everywhere on the Moon.
 
 When a ray is "cast", walked step-wise, the algorithm determines which grid-square of the moon the ray is over and tests the ray's height against the elevation for that square (voxel) of the moon. When the ray intersects, the color for that voxel is assigned to the pixel on the screen. The ray then continues, representing the next pixel above, until it has either painted the entire vertical column of pixels on the display or until some fixed distance where the algorithm just "gives up". In the latter case we assume the ray has headed off into space (literally) and so instead we color the pixel in question with a color from our starry background.
 
@@ -105,7 +107,7 @@ For the 64ppd data set, I did start with a mosaic (map) of the entire moon. It w
 
 Finally, the Moon is also not to scale vertically. There is a vertical scale factor I apply to the terrain — a bigger value makes the craters deeper, the mountains more peaked. A friend who's something of an avid hobbyist astronomer tried the game and suggested that I take the vertical scale down a bit to make it more true to the actual Moon. I did try dialing it back but I'm afraid I had already fallen in love with the more exaggerated Moon terrain I had begun with and so rolled it back up again.
 
-More about creating the game here: https://www.engineersneedart.com/mooncraft2000/mooncraft2000.html
+More about creating the game [on my blog](https://www.engineersneedart.com/mooncraft2000/mooncraft2000.html).
 
 ### Shortcomings
 
