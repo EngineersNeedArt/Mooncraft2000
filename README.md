@@ -4,13 +4,11 @@ A voxelish game &mdash; set on the Moon &mdash; in Javascript.
 
 The game is being hosted here: https://mooncraft2000.com
 
-I experimented with a few tricks to try to keep this classic pseudo-voxel algorithm fast (but it still falls down on older or slower hardware). I'm also learning Javascript.
+I experimented with a few tricks to try to keep this classic pseudo-voxel algorithm fast (but it still falls down on older or slower hardware). Chrome on my Mac is getting a much worse frame-rate, Safari is better &mdash; I have no idea why. I'm also learning Javascript.
 
 <p align="center">
 <img src="https://github.com/EngineersNeedArt/Mooncraft2000/blob/07a643031af5796f521418073956f04901b00056/documentation/Screenshot.jpg" alt="Mooncraft 2000 screenshot.">
 </p>
-
-The game renders the Moon from actual data pulled from NASA and other space-agencies. As an Apprentice moon trucker, you fly your mooncraft from lunar base to lunar base moving cargo to where it's needed. Truck enough cargo to earn your Journeyman certification and you'll be on your way to achieving Master.
 
 ### How to Play
 
@@ -37,7 +35,7 @@ Back on the surface, the base platform allows you to change heading before lift-
 
 Long cargo runs (distances of 2000 or more) count for double-cargo and will advance you in rank more quickly. Distances of 3000 or greater count as a triple-cargo bonus.
 
-If you become stranded, unable to make it to a base, you are penalized.
+If you become stranded, unable to make it to a base, you are penalized but will be rescued.
 
 Crash your mooncraft, you are heavily penalized.
 
@@ -47,7 +45,7 @@ Crash your mooncraft, you are heavily penalized.
 
 #### Compass
 
-At the top is a standard compass (inertial, not magnetic). Markings N, S, E & W as well as intermediate NE, SE, SW, and NW. Pilot is expected to be able to estimate unmarked headings such as N/NW (north by northwest — halfway between N and NW).
+At the top is an inertial compass. Markings N, S, E & W as well as intermediate NE, SE, SW, and NW. Pilot is expected to be able to estimate unmarked headings such as N/NW (north by northwest — halfway between N and NW).
 
 #### Map
 
@@ -55,7 +53,7 @@ Lower left CRT map displays major lunar features, heading overlay. Top of the di
 
 #### Instruments
 
-Lower-center instrument cluster with downward radar and camera. Top scope displays downward-facing radar of terrain (mooncraft graphic not to scale). Lower CRT is downard-facing (landing) camera. Nixies on either side of CRT give digital values for vertical velocity, altitude, fuel and forward verlocity. "Idiot lights" above nixies indicate dangerous vertical velocity, low altitude warning, low fuel, and when on surface (touchdown).
+Lower-center instrument cluster with downward radar and camera. Top scope displays downward-facing radar of terrain (mooncraft graphic not to scale). Lower CRT is downward-facing (landing) camera. Nixies on either side of CRT give digital values for vertical velocity, altitude, fuel and forward velocity. "Idiot lights" above nixies indicate dangerous vertical velocity, low altitude warning, low fuel, and when on surface (touchdown).
 
 #### Monitor
 
@@ -63,7 +61,7 @@ Lower right computer monitor (8-bit). Displays messages from various sources. In
 
 ### FPS
 
-The "1" key toggles a little debug display in the lower right corner of the Map. The time to execute one entire frame in millseconds is displayed in the top-right. Frames-per-second (FPS) is displayed below. I have never seen FPS exceed 60 &mdash; perhaps the HTML5 Canvas only renders during "screen refreshes" and is gaited to 60 FPS (I know, screen refreshes seem a bit arachaic these days).
+The "1" key toggles a little debug display in the lower right corner of the Map. The time to execute one entire frame in milliseconds is displayed in the top-right. Frames-per-second (FPS) is displayed below. I have never seen FPS exceed 60 &mdash; perhaps the HTML5 Canvas only renders during "screen refreshes" and is gaited to 60 FPS.
 
 The letters to the left of FPS indicate the state of various game settings.
 
@@ -81,7 +79,13 @@ The letters to the left of FPS indicate the state of various game settings.
 
 The voxel algorithm has been around since the 1990's so here I will give only a brief description. It's a kind of "ray casting" (like a poor man's ray-tracer). The view of the landscape (what the player sees) is, to the algorithm, a series of vertical slits, or pixel columns. The algorithm works on one column at a time. It computes the slope of an imaginary line leaving the player's eye and passing through the bottom-most pixel of the particular pixel-column in question. The ray is advanced, step-wise (slope-wise), until it is determined that it has intercepted a Moon voxel.
 
+My Javascript implementation took inspiration from [this code](https://github.com/pmhicks/voxeljs) from eight years ago.
+
 The Moon is a vast mosaic of tiles, each tile 512 x 512 "voxels". Because it is a simple terrain map, you can think of each tile as a 512 x 512 grid where, for each square in the grid, there is a color and an elevation. This being the Moon, the color is of course some shade of gray. The elevation is what gives rise to the craters, mountains, mare of the moon.
+
+> The Moon data came from NASA's [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720).
+> 
+> The color data for the Moon is without shadows, so I had to render shadows into the color data using the application [Blender](https://www.blender.org). Since the shadows were rendered "relief style" (also, orthographically) the Sun is at the same ascension everywhere on the Moon.
 
 When a ray is "cast", walked step-wise, the algorithm determines which grid-square of the moon the ray is over and tests the ray's height against the elevation for that square (voxel) of the moon. When the ray intersects, the color for that voxel is assigned to the pixel on the screen. The ray then continues, representing the next pixel above, until it has either painted the entire vertical column of pixels on the display or until some fixed distance where the algorithm just "gives up". In the latter case we assume the ray has headed off into space (literally) and so instead we color the pixel in question with a color from our starry background.
 
@@ -97,11 +101,13 @@ To put it even more in perspective, those little lunar bases in the game that yo
 
 Data sets exist at 128ppd, 256ppd, even 512ppd. The largest (512ppd) would bring a voxel down to slightly less than a football field in size. That would bring the scale of the moon a little closer to what it should be in the game but at a cost of 64 tiles/voxels for each of the one tiles/voxels in the game. Throw out the data from the "dark" (far) side of the moon and you could cut the number in half. Trim the playable area of the game down further still and maybe you cut it in half again? Still leaves you juggling/storing a lot of tile data.
 
-Additionally, working with very large data sets (moon images) gets to be difficult. It's unlikely you will be able to stitch the tiles together insto a large mosaic image and find a paint program that can handle a file of that size.
+Additionally, working with very large data sets (moon images) gets to be difficult. It's unlikely you will be able to stitch the tiles together into a large mosaic image and find a paint program that can handle a file of that size.
 
 For the 64ppd data set, I did start with a mosaic (map) of the entire moon. It was difficult to work with (some image editing programs crapped out altogether). Blender (a 3-D modeling application) running on my laptop was only barely able to render the topographical shadows that I required (and took 12 hours or so). If I even went the next step up to the 128ppd image data set, I will likely have to quarter the moon (and leave a row/column overlap between quarters) in order to render shadows.
 
-Finally, the Moon is also not to scale vertically. There is a vertical scale factor I apply to the terrain — a bigger value makes the craters deeper, the mountains more peaked. A friend who's something of an avid hobbyist astronomer took a Mooncraft for a spin and suggested that I take the vertical scale down a bit to make it more true to the actual Moon. I swear that I did try dialing it back but I'm afraid I had already fallen in love with the more exaggerated Moon terrain I had begun with and so rolled it back up again.
+Finally, the Moon is also not to scale vertically. There is a vertical scale factor I apply to the terrain — a bigger value makes the craters deeper, the mountains more peaked. A friend who's something of an avid hobbyist astronomer tried the game and suggested that I take the vertical scale down a bit to make it more true to the actual Moon. I did try dialing it back but I'm afraid I had already fallen in love with the more exaggerated Moon terrain I had begun with and so rolled it back up again.
+
+More about creating the game [on my blog](https://www.engineersneedart.com/mooncraft2000/mooncraft2000.html).
 
 ### Shortcomings
 
@@ -113,23 +119,27 @@ I pursued but ultimately aborted an attempt at using Web Workers to handle (in p
 
 I suspect the last, best chance of performance improvement is through Web Assembly. At this point I think Web Assembly is beyond my abilities. I have written the voxel algorithm in C before but how to compile for Web, expose an API, call into this API &hellip; I have no idea.
 
-For reasons I dont understand, the framerate seems to slow down as you play when on Chrome (I'm testing on Mac OS). This does not happen on Safari. I have found though that if I refresh the page on Chrome, the framerate comes back up to what I expect. That *feels* to me like perhaps the garbage is not being taken out and we are resource starved, but I'm only guessing.
+For reasons I don't understand, the frame-rate seems to slow down as you play when on Chrome (I'm testing on Mac OS). This does not happen on Safari. I have found though that if I refresh the page on Chrome, the frame-rate comes back up to what I expect. That *feels* to me like perhaps the garbage is not being taken out and we are resource starved, but I'm only guessing.
 
-Mobile, I confess, was an after-thought. I tried somewhat to make the game playable on mobile by providing on-screen buttons for controlling the craft. It didn't make a lot of sense though when I tried it on my phone &madash; it was so small. I have not tried it on an iPad but I am not sure there is much of an audience on that configuration.
+I had noticed in development that having a clip on the Canvas seemed to slow down Chrome much more than Safari. (I had tried to get rid of the clipping, perhaps it crept back into the code.)
+
+Mobile, I confess, was an after-thought. I tried somewhat to make the game playable on mobile by providing on-screen buttons for controlling the craft. It didn't make a lot of sense though when I tried it on my phone &mdash; it was so small. I have not tried it on an iPad but I am not sure there is much of an audience on that configuration.
 
 ### Looking Forward
 
 From things detailed above, it's clear the game would benefit from any performance improvements.
 
-Also it would be nice to move to a more detailed Moon tile set. I created an experimental 128ppd Moon tile data set (twice the longitudinal and twice the latitudinal resolution as the 64ppd tiles in the game) and it really made the Moon feel much, much larger. One problem I ran into however was that the data-set itself had a good deal more flaws than the 64ppd data (was not without shadows for better or worse). Also, doubling the scale of the data also doubled the dynamic range of the elevation. It was looking like limiting elevation to 256 discreet values (one byte) would fall down as you moved to 128ppd and higher resolutions. One solution would be to go to two-bytes for elevation (will increase the tile size). Another solution would be to stick with one-byte-per-voxel but make it relative to some two-byte value for the tile itself.
+Also it would be nice to move to a more detailed Moon tile set. I created an experimental 128ppd Moon tile data set (twice the longitudinal and twice the latitudinal resolution as the 64ppd tiles in the game) and it really made the Moon feel much, much larger. The data-set itself had a good deal more flaws than the 64ppd data which is unfortunate. Also, doubling the scale of the data also doubled the dynamic range of the elevation. It was looking like limiting elevation to 256 discreet values (one byte) would fall down as you moved to 128ppd and higher resolutions. One solution would be to go to two-bytes for elevation (that will increase the tile size). Another solution would be to stick with one-byte-per-voxel but make it relative to some two-byte value for the tile itself (we can assume that both the Mount Everest and Death Valley of the Moon are not on the same tile).
 
-Apart from the technical improvements, i wonder if there's not a much better game hiding within this one. To get the game out &mdash; give it a chance to breath &mdash; I did not invest in a complicated lunar ecosystem where, perhaps, lunar bases nearer the poles mine water from the soil while equatorial bases harvest solar energy. Maybe one or two bases near the equator have rail launchers and serve as the cargo destination for other moon resources mined like rare minerals or metals. With such an ecosystem simulated, certain goods would be in demand in some areas of the Moon, be in surplus in others. The player therefore could engage in mercantilism much like the classic 8-bit game, *Elite*.
+Apart from the technical improvements, I wonder if there's not a better game hiding within this one. To get the game out &mdash; give it a chance to breath &mdash; I did not invest in a complicated lunar ecosystem where, perhaps, lunar bases nearer the poles mine water in the shadows while equatorial bases harvest solar energy. Maybe one or two bases near the equator have rail launchers and serve as the cargo destination for other moon resources mined like rare minerals or metals. With such an ecosystem simulated, certain goods would be needed in some areas of the Moon, be in surplus in others. The player therefore could engage in mercantilism much like the early classic 8-bit game, *Elite*.
 
-Occassional medical emergencies might emerge and take high priority &mdash; moving medical supplies taking priority over profit.
+Occasional medical emergencies might emerge and take high priority &mdash; moving medical supplies taking priority over profit.
 
-What if cargo could be jettisoned anywhere over the surfaxce of the moon, picked up later?
+What if cargo could be jettisoned anywhere over the surface of the moon, picked up later?
 
-A huge move forward would be to add the ability to render 3D into the scene (or psuedo-3d like the classic *Wing Commander* series). Other mooncraft could be seen taking off, landing at bases, flying between bases (the bases themselves could be made more interesrting looking). Suddenly mercantilism combined with multi-player could then transform the game. In addition to the rendering technical challenges however, a server back-end and something like Web Sockets would be required&hellip;
+Love to figure out how to make dust billow up when you touch-down/lift-off.
+
+A huge move forward would be to add the ability to render 3D into the scene (or psuedo-3D like the classic *Wing Commander* series of games). Other mooncraft could be seen taking off, landing at bases, flying between bases (the bases themselves could be made more interesting looking). Suddenly mercantilism combined with multi-player could then transform the game. In addition to the rendering technical challenges however, a server back-end and something like Web Sockets would be required&hellip;
 
 <p align="center">
 <i>"Good enough for 1.0…"</i>
