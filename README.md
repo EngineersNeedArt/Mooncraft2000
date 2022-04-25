@@ -4,7 +4,7 @@ A voxelish game &mdash; set on the Moon &mdash; in Javascript.
 
 The game is being hosted here: https://mooncraft2000.com
 
-I experimented with a few tricks to try to keep this classic pseudo-voxel algorithm fast (but it still falls down on older or slower hardware). I'm also learning Javascript.
+I experimented with a few tricks to try to keep this classic pseudo-voxel algorithm fast (but it still falls down on older or slower hardware). Chrome on my Mac is getting a much worse frame-rate, Safari is better &mdash; I have no idea why. I'm also learning Javascript.
 
 <p align="center">
 <img src="https://github.com/EngineersNeedArt/Mooncraft2000/blob/07a643031af5796f521418073956f04901b00056/documentation/Screenshot.jpg" alt="Mooncraft 2000 screenshot.">
@@ -120,6 +120,8 @@ I pursued but ultimately aborted an attempt at using Web Workers to handle (in p
 I suspect the last, best chance of performance improvement is through Web Assembly. At this point I think Web Assembly is beyond my abilities. I have written the voxel algorithm in C before but how to compile for Web, expose an API, call into this API &hellip; I have no idea.
 
 For reasons I don't understand, the frame-rate seems to slow down as you play when on Chrome (I'm testing on Mac OS). This does not happen on Safari. I have found though that if I refresh the page on Chrome, the frame-rate comes back up to what I expect. That *feels* to me like perhaps the garbage is not being taken out and we are resource starved, but I'm only guessing.
+
+I had noticed in development that having a clip on the Canvas seemed to slow down Chrome much more than Safari. (I had tried to get rid of the clipping, perhaps it crept back into the code.)
 
 Mobile, I confess, was an after-thought. I tried somewhat to make the game playable on mobile by providing on-screen buttons for controlling the craft. It didn't make a lot of sense though when I tried it on my phone &mdash; it was so small. I have not tried it on an iPad but I am not sure there is much of an audience on that configuration.
 
