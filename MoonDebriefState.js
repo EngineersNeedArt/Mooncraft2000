@@ -161,7 +161,7 @@ var MoonDebriefState = (function () {
 				_wasRank = Mooncraft.playerRank ();
 				var cargo = MoonFlyingState.cargo ();
 				if (cargo > 0) {
-					var baseDeparted = LocalStorage.valueForKey ("MOONCRAFT0_BASEDEPARTED", null);
+					var baseDeparted = LocalStorage.valueForKey ("MOONCRAFT0_BASEDEPARTED", "PRB");
 					if (baseDeparted == _base.display_name) {
 						MoonBaseMonitor.pushText ("This is our cargo. You need to move it.");
 						_debriefingState = debriefing_state.rank;			// --> rank
