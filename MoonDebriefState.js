@@ -259,7 +259,7 @@ var MoonDebriefState = (function () {
 					_cargoSelected = 0;
 					MoonBaseMonitor.pushText (" ");
 					MoonBaseMonitor.pushText ("Use LEFT/RIGHT to change cargo size.");
-					MoonBaseMonitor.pushText ("Hit ENTER to confirm cargo:");
+					MoonBaseMonitor.pushText ("Hit ENTER (THRUST) to confirm cargo:");
 					MoonBaseMonitor.pushText (kCargoSelectedText[_cargoSelected]);
 					_waitingForInput = true;
 					_debriefingState = debriefing_state.acknowledgeCargo;	// --> acknowledgeCargo
@@ -346,7 +346,7 @@ var MoonDebriefState = (function () {
 					MoonBaseMonitor.pushText (oneBase.display_name + ":" + oneBase.name + " [" + heading + ":" + distance + "]");
 				}
 				MoonBaseMonitor.pushText (" ");
-				MoonBaseMonitor.pushText ("Hit ENTER to continue...");
+				MoonBaseMonitor.pushText ("Hit ENTER (THRUST) to continue...");
 				_waitingForInput = true;
 				_debriefingState = debriefing_state.acknowledgeBase;		// --> acknowledgeBase
 			} else if (currentTime > _interStatialTime) {

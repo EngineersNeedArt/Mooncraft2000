@@ -56,24 +56,6 @@ canvas {
 	-ms-user-select: none;
 	user-select: none;
 }
- 
-@media (max-width: 768px) {
-	.content-desktop {
-		display: none;
-	}
-	.content-mobile {
-		display: block;
-	}
-}
-
-@media (min-width: 768px) {
-	.content-desktop {
-		display: block;
-	}
-	.content-mobile {
-		display: none;
-	}
-}
 
 .modal {
 	display: none;

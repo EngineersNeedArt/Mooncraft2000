@@ -36,19 +36,19 @@
 		</div>
 		
 		<div class="flex-container">
-			<div id="thrust" class="content-mobile unselectable">
+			<div id="thrust" class="unselectable">
 				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/capslock.svg"></div>
 			</div>
-			<div id="forward" class="content-mobile unselectable">
+			<div id="forward" class="unselectable">
 				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/caret-up.svg"></div>
 			</div>
-			<div id="reverse" class="content-mobile unselectable">
+			<div id="reverse" class="unselectable">
 				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/caret-down.svg"></div>
 			</div>
-			<div id="yaw_left" class="content-mobile unselectable">
+			<div id="yaw_left" class="unselectable">
 				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/caret-left.svg"></div>
 			</div>
-			<div id="yaw_right" class="content-mobile unselectable">
+			<div id="yaw_right" class="unselectable">
 				<div class="icon-container"><img style="width:32px; padding-top:16px;" src="./artwork/caret-right.svg"></div>
 			</div>
 		</div>
@@ -156,6 +156,21 @@
 				yaw_right_div.addEventListener ("touchmove", clicked_rightArrow);
 				yaw_right_div.addEventListener ("touchcancel", released_rightArrow);
 				
+				// Show buttons on touch device, hide on keybpard device.
+				if (isTouchDevice ()) {
+					document.getElementById ("thrust").style["display"] = "block";
+					document.getElementById ("forward").style["display"] = "block";
+					document.getElementById ("reverse").style["display"] = "block";
+					document.getElementById ("yaw_left").style["display"] = "block";
+					document.getElementById ("yaw_right").style["display"] = "block";
+				} else {
+					document.getElementById ("thrust").style["display"] = "none";
+					document.getElementById ("forward").style["display"] = "none";
+					document.getElementById ("reverse").style["display"] = "none";
+					document.getElementById ("yaw_left").style["display"] = "none";
+					document.getElementById ("yaw_right").style["display"] = "none";
+				}
+				
 				Mooncraft.setAlertCallback (mooncraftAlertCallback)
 				Mooncraft.init (canvas, 512);
 				Mooncraft.load ();
@@ -206,6 +221,10 @@
 				
 				// Show alert.
 				modalWindow.style.display = "block";
+			}
+			
+			function isTouchDevice () {
+				return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
 			}
 			
 			function canvasScaleFactor (canvas) {
